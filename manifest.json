@@ -1,0 +1,46 @@
+{
+  "manifest_version": 3,
+  "name": "Quick Book AutoFill",
+  "version": "1.0",
+  "description": "Auto-fill booking forms for faster ticket booking",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://*.irctc.co.in/*",
+    "https://irctc.co.in/*",
+    "http://*.irctc.co.in/*",
+    "http://irctc.co.in/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.irctc.co.in/*",
+        "https://irctc.co.in/*",
+        "http://*.irctc.co.in/*",
+        "http://irctc.co.in/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

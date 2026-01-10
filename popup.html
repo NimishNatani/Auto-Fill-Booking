@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      width: 450px;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      background: #f5f7fa;
+    }
+    .header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 600;
+    }
+    .header p {
+      margin: 5px 0 0 0;
+      font-size: 13px;
+      opacity: 0.9;
+    }
+    
+    .website-selector {
+      background: white;
+      padding: 15px 20px;
+      border-bottom: 1px solid #e1e8ed;
+    }
+    .website-selector label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 8px;
+    }
+    .website-selector select {
+      width: 100%;
+      padding: 10px;
+      border: 2px solid #e1e8ed;
+      border-radius: 8px;
+      font-size: 14px;
+      background: white;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .website-selector select:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+    
+    .content {
+      padding: 20px;
+    }
+    
+    .section {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #333;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-icon {
+      font-size: 18px;
+    }
+    .section-count {
+      background: #667eea;
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    
+    .passenger-list {
+      max-height: 250px;
+      overflow-y: auto;
+      margin-bottom: 12px;
+    }
+    .passenger-item {
+      background: #f8f9fa;
+      padding: 12px;
+      margin-bottom: 8px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #e1e8ed;
+    }
+    .passenger-info {
+      flex: 1;
+    }
+    .passenger-name {
+      font-weight: 600;
+      color: #333;
+      font-size: 14px;
+    }
+    .passenger-details {
+      font-size: 12px;
+      color: #666;
+      margin-top: 4px;
+    }
+    
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 13px;
+      color: #333;
+      font-weight: 500;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border: 2px solid #e1e8ed;
+      border-radius: 8px;
+      font-size: 13px;
+      box-sizing: border-box;
+      transition: border-color 0.2s;
+    }
+    input:focus, select:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+    
+    button {
+      padding: 10px 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .btn-primary {
+      background: #667eea;
+      color: white;
+    }
+    .btn-primary:hover {
+      background: #5568d3;
+      transform: translateY(-1px);
+    }
+    .btn-success {
+      background: #28a745;
+      color: white;
+      width: 100%;
+      padding: 14px;
+      font-size: 15px;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+    }
+    .btn-success:hover {
+      background: #218838;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(40, 167, 69, 0.4);
+    }
+    .btn-danger {
+      background: #dc3545;
+      color: white;
+    }
+    .btn-danger:hover {
+      background: #c82333;
+    }
+    .btn-secondary {
+      background: #6c757d;
+      color: white;
+    }
+    .btn-outline {
+      background: white;
+      border: 2px solid #667eea;
+      color: #667eea;
+    }
+    
+    .info-display {
+      background: #e7f3ff;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      border-left: 4px solid #667eea;
+    }
+    .info-label {
+      font-weight: 600;
+      color: #333;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .info-value {
+      color: #555;
+      font-size: 14px;
+      margin-top: 4px;
+    }
+    
+    .empty-state {
+      text-align: center;
+      padding: 30px 20px;
+      color: #999;
+    }
+    .empty-state-icon {
+      font-size: 48px;
+      margin-bottom: 10px;
+      opacity: 0.3;
+    }
+    
+    .status-message {
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      font-size: 13px;
+      display: none;
+      animation: slideIn 0.3s ease;
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .status-success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+    .status-error {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+    
+    .form-section {
+      display: none;
+    }
+    .form-section.active {
+      display: block;
+    }
+    
+    .button-group {
+      display: flex;
+      gap: 10px;
+    }
+    .button-group button {
+      flex: 1;
+    }
+    
+    /* Scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #999;
+    }
+    
+    .divider {
+      height: 1px;
+      background: #e1e8ed;
+      margin: 15px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>⚡ Quick Book AutoFill</h1>
+    <p>Fill forms instantly for faster bookings</p>
+  </div>
+
+  <div class="website-selector">
+    <label>Select Website</label>
+    <select id="websiteSelect">
+      <option value="irctc">🚂 IRCTC (Indian Railways)</option>
+      <option value="makemytrip" disabled>✈️ MakeMyTrip (Coming Soon)</option>
+      <option value="bookmyshow" disabled>🎬 BookMyShow (Coming Soon)</option>
+    </select>
+  </div>
+
+  <div class="content">
+    <div id="status-message" class="status-message"></div>
+
+    <!-- IRCTC Content -->
+    <div id="irctc-content">
+      <!-- Auto Fill Section -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-title">
+            <span class="section-icon">🚀</span>
+            Quick Fill
+          </div>
+        </div>
+        <button class="btn-success" id="fillBtn">Fill Form Now</button>
+      </div>
+
+      <!-- Passengers Section -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-title">
+            <span class="section-icon">👥</span>
+            Passengers
+          </div>
+          <span class="section-count" id="passengerCount">0</span>
+        </div>
+
+        <div id="passengerListView">
+          <div class="passenger-list" id="passengerList"></div>
+          <button class="btn-primary" id="addPassengerBtn" style="width: 100%;">+ Add Passenger</button>
+        </div>
+
+        <div id="passengerForm" class="form-section">
+          <div class="form-group">
+            <label>Full Name *</label>
+            <input type="text" id="passengerName" placeholder="e.g., RAJESH KUMAR">
+          </div>
+          <div class="form-group">
+            <label>Age *</label>
+            <input type="number" id="passengerAge" placeholder="e.g., 32" min="1" max="120">
+          </div>
+          <div class="form-group">
+            <label>Gender *</label>
+            <select id="passengerGender">
+              <option value="">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Transgender">Transgender</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Berth Preference</label>
+            <select id="passengerBerth">
+              <option value="">No Preference</option>
+              <option value="Lower">Lower</option>
+              <option value="Middle">Middle</option>
+              <option value="Upper">Upper</option>
+              <option value="Side Lower">Side Lower</option>
+              <option value="Side Upper">Side Upper</option>
+            </select>
+          </div>
+          <div class="button-group">
+            <button class="btn-primary" id="savePassengerBtn">Save</button>
+            <button class="btn-secondary" id="cancelPassengerBtn">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Details Section -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-title">
+            <span class="section-icon">📱</span>
+            Contact Details
+          </div>
+        </div>
+
+        <div id="contactDisplay" style="display: none;">
+          <div class="info-display">
+            <div class="info-label">Mobile Number</div>
+            <div class="info-value" id="displayMobile">-</div>
+          </div>
+          <div class="info-display">
+            <div class="info-label">Email Address</div>
+            <div class="info-value" id="displayEmail">-</div>
+          </div>
+          <button class="btn-outline" id="editContactBtn" style="width: 100%;">Edit Contact</button>
+        </div>
+
+        <div id="contactForm">
+          <div class="form-group">
+            <label>Mobile Number *</label>
+            <input type="tel" id="contactMobile" placeholder="e.g., 9876543210" maxlength="10">
+          </div>
+          <div class="form-group">
+            <label>Email Address *</label>
+            <input type="email" id="contactEmail" placeholder="e.g., your@email.com">
+          </div>
+          <button class="btn-primary" id="saveContactBtn" style="width: 100%;">Save Contact</button>
+        </div>
+      </div>
+
+      <!-- Payment Details Section -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-title">
+            <span class="section-icon">💳</span>
+            Payment Details (Optional)
+          </div>
+        </div>
+
+        <div id="paymentDisplay" style="display: none;">
+          <div class="info-display">
+            <div class="info-label">Payment Method</div>
+            <div class="info-value" id="displayPaymentMethod">-</div>
+          </div>
+          <button class="btn-outline" id="editPaymentBtn" style="width: 100%;">Edit Payment</button>
+        </div>
+
+        <div id="paymentForm">
+          <div class="form-group">
+            <label>Preferred Payment Method *</label>
+            <select id="paymentMethod">
+              <option value="">Select Payment Method</option>
+              <option value="UPI">BHIM/UPI</option>
+              <option value="Cards">Credit/Debit Cards / Net Banking / Wallets</option>
+            </select>
+          </div>
+          <div class="form-group" id="upiIdGroup" style="display: none;">
+            <label>UPI ID</label>
+            <input type="text" id="upiId" placeholder="e.g., yourname@paytm">
+          </div>
+          <button class="btn-primary" id="savePaymentBtn" style="width: 100%;">Save Payment</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Other Websites (Coming Soon) -->
+    <div id="other-content" style="display: none;">
+      <div class="section">
+        <div class="empty-state">
+          <div class="empty-state-icon">🚧</div>
+          <h3 style="margin: 10px 0;">Coming Soon</h3>
+          <p style="margin: 5px 0;">This website support is under development</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
