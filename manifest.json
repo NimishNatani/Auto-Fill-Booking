@@ -5,8 +5,7 @@
   "description": "Auto-fill booking forms for faster ticket booking",
   "permissions": [
     "storage",
-    "activeTab",
-    "scripting"
+    "activeTab"
   ],
   "host_permissions": [
     "https://*.irctc.co.in/*",
